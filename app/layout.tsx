@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Header } from "./components/header/Header";
+import { Footer } from "./components/footer/Footer";
 
-const inter = Inter({ subsets: ["latin"], weight: ['400', '600'] });
+const inter = Inter({ subsets: ["latin"], weight: ['400', '600']});
 
 export const metadata: Metadata = {
   title: "Coffee House",
@@ -19,7 +21,20 @@ export default function RootLayout({
       <head>
       <link rel="icon" href="/cup.svg" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div className="
+        flex 
+        flex-col 
+        p-3 md:p-5
+        min-h-screen 
+        bg-light">
+          <Header/>
+          <main className="flex-grow">
+            {children}
+          </main>
+          <Footer/>
+        </div>
+      </body>
     </html>
   );
 }

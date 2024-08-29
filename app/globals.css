@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.underline-center {
+    position: relative;
+    display: inline-block;
+    color: inherit;
+}
+  
+.underline-center::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: currentColor;
+    transition: width 0.3s ease, left 0.3s ease;
+}
+  
+.underline-center:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+
