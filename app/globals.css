@@ -24,4 +24,14 @@
     left: 0;
 }
 
+.swiper-button-prev,
+.swiper-button-next {
+    color: #403F3D !important;
+}
+
+.swiper-pagination-bullet-active {
+    background: #403F3D !important;
+}
+
+
 

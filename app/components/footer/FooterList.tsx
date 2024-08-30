@@ -9,7 +9,7 @@ export const FooterList: React.FC<FooterListProps> = ({children}) => {
     md: w-1/2
     flex
     flex-col
-    gap-[40px]
+    gap-[20px] md:gap-[40px]
     ">
         {children}
     </div>

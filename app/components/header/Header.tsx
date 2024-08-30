@@ -5,7 +5,7 @@ import { Container } from '../Container';
 
 export const Header = () => {
   return (
-    <div>
+    <header>
       <Container>
         <div className="
         flex
@@ -31,7 +31,7 @@ export const Header = () => {
           </div>
         </div>
       </Container>
-    </div>
+    </header>
   )
 }
 

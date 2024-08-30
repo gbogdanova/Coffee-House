@@ -20,6 +20,8 @@ const config: Config = {
         'heading-3':['24px','125%'],
         'heading-1':['42px','125%'],
         'heading-2':['32px','125%'],
+        'link-butt':['16px','150%'],
+        'caption':['10px','140%']
       },
       fontWeight: {
         'heading-1': '600',

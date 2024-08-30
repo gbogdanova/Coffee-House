@@ -21,8 +21,10 @@ export default function RootLayout({
       <head>
       <link rel="icon" href="/cup.svg" />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} bg-light`}>
         <div className="
+        max-w-[1440px]
+        mx-auto
         flex 
         flex-col 
         p-3 md:p-5

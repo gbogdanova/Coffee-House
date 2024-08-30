@@ -8,6 +8,7 @@ import { MdOutlineWatchLater } from "react-icons/md";
 export const Footer = () => {
   return (
     <footer className="
+    mt-[20px]
     p-[40px] lg:p-[100px]
     rounded-[40px]
     bg-container">
