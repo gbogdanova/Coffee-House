@@ -29,7 +29,7 @@ export const HomeBanner = () => {
             and those seeking a warm and inviting space to enjoy their
             favorite beverage.
         </p>
-        <Link href="#" className="
+        <Link href="/menu" className="
         flex
         justify-center
         w-[200px]

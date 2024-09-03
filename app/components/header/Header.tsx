@@ -26,7 +26,7 @@ export const Header = () => {
           item-center
           gap-3
           ">
-            <div>Menu</div>
+            <Link href="/menu">Menu</Link>
             <div>Cart</div>
           </div>
         </div>
