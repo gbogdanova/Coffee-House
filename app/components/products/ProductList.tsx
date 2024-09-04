@@ -28,9 +28,15 @@ export const ProductList = () => {
   
   return (
     <div>
-      {products.map(product => (
-        <ProductCard key={product.id} product={product} />
-      ))}
-    </div>
+    {products ? (
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10">
+        {products.map(product => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
+    ) : (
+      <div>...loading...</div>
+    )}
+  </div>  
   )
 }

@@ -13,6 +13,7 @@ const config: Config = {
         'light': `#E1D4C9`,
         'accent': `#B0907A`,
         'container': `#665F55`,
+        'lightB': `#C1B6AD`,
       },
       fontSize: {
         'heading-1-md':['72px','105%'],
