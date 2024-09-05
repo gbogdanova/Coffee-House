@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect } from 'react';
 import { ProductCard } from './ProductCard';
 import { Product } from '@/app/types/product';
@@ -44,7 +46,7 @@ export const ProductList = () => {
         </div>
         { visibleCount < products.length && (
           <div className="flex justify-center pt-4">
-            <button onClick={loadMore}  className="flex items-center justify-center w-12 h-12 rounded-full border border-container  text-container hover:text-light hover:bg-container"><RxReload size={20}/></button>
+            <button onClick={loadMore}  className="flex items-center justify-center w-12 h-12 rounded-full border border-dark  text-container hover:text-light hover:bg-container"><RxReload size={20}/></button>
           </div>
         )}
       </div>
