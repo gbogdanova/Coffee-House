@@ -6,16 +6,18 @@ import { Product } from '../../types/product';
 import Image from 'next/image';
 import truncateText from '@/utils/truncateText';
 import formatPrice from '@/utils/formatPrice';
+import { useRouter } from 'next/navigation';
 
 interface ProductCardProps {
   product: Product;
 }
 
 export const ProductCard = ({product}: ProductCardProps) => {
+  const router = useRouter();
   return (
-    <div className="text-dark box-border border border-lightB rounded-3xl overflow-hidden">
-      <Link href='#'>
-        <div className="h-full flex flex-col relative group">
+    <div onClick={() => router.push(`/product/${product.id}`)} 
+    className="text-dark box-border border border-lightB rounded-3xl overflow-hidden">
+        <div className="h-full flex flex-col relative group hover:cursor-pointer">
           <div className="overflow-hidden rounded-3xl">
             <Image 
               src={product.image} 
@@ -31,7 +33,6 @@ export const ProductCard = ({product}: ProductCardProps) => {
               <div className="flex font-semibold text-heading-3">{formatPrice(product.price)}</div>
           </div>
         </div>
-     </Link>
    </div>
   )
 }
