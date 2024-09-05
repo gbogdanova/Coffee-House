@@ -2,7 +2,7 @@ export interface Product {
     id: string,
     name: string,
     description: string,
-    price: string,
+    price: number,
     category: string,
     sizes: {
       [key: string]: SizeOption;
@@ -13,9 +13,9 @@ export interface Product {
 
 interface SizeOption {
     size: string,
-    "add-price": string,
+    "add-price": number,
 }
 interface AdditivesOptions {
     name: string,
-    "add-price": string,
+    "add-price": number,
 }

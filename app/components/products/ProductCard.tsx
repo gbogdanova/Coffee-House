@@ -4,6 +4,8 @@ import React from 'react';
 import Link from 'next/link';
 import { Product } from '../../types/product';
 import Image from 'next/image';
+import truncateText from '@/utils/truncateText';
+import formatPrice from '@/utils/formatPrice';
 
 interface ProductCardProps {
   product: Product;
@@ -25,8 +27,8 @@ export const ProductCard = ({product}: ProductCardProps) => {
           </div>
           <div className="flex flex-col flex-1 px-3 py-4 gap-2 justify-between">
               <div className="flex font-medium text-heading-3">{product.name}</div>
-              <div className="flex flex-grow font-light">{product.description}</div>
-              <div className="flex font-semibold text-heading-3">${product.price}</div>
+              <div className="flex flex-grow font-light">{truncateText(product.description)}</div>
+              <div className="flex font-semibold text-heading-3">{formatPrice(product.price)}</div>
           </div>
         </div>
      </Link>
