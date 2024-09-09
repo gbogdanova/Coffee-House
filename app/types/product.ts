@@ -11,11 +11,11 @@ export interface Product {
     image: string,
   }
 
-interface SizeOption {
+export interface SizeOption {
     size: string,
     "add-price": number,
 }
-interface AdditivesOptions {
+export interface AdditivesOptions {
     name: string,
     "add-price": number,
 }
