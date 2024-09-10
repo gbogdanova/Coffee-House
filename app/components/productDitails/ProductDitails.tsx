@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Image from 'next/image';
 import formatPrice from '@/utils/formatPrice';
 import { IoIosInformationCircleOutline } from "react-icons/io";
+import { SizeOptions } from './SizeOptions';
 
 
 interface ProductProp {
@@ -10,6 +11,13 @@ interface ProductProp {
 }
 
 export const ProductDitails = ({product}: ProductProp) => {
+  const[selectedSize,setSelectedSize] = useState<number>(0);
+
+  const handleSizeChange = (sizePrice: number) => {
+    setSelectedSize(sizePrice)
+  }
+  const totalPrice = product.price + selectedSize;
+    
 
   return (
     <div className="my-[40px] md:my-[60px] flex flex-col gap-[40px] md:flex-row md:gap-[60px] text-dark">
@@ -25,11 +33,18 @@ export const ProductDitails = ({product}: ProductProp) => {
       <div className="flex flex-col gap-6">
         <div className="flex font-medium text-heading-2">{product.name}</div>
         <div className="flex font-light ">{product.description}</div>
-        <div>Size</div>
+        <div>
+          <div>Size</div>
+          <SizeOptions 
+          sizes={product.sizes} 
+          selectedSize={selectedSize}
+          handleSizeChange={handleSizeChange}
+          />
+        </div>
         <div>Additives</div>
         <div className="flex justify-between font-medium text-heading-2">
           <div>Total:</div>
-          <div>{formatPrice(product.price)}</div>
+          <div>{formatPrice(totalPrice)}</div>
         </div>
         <hr className="border-lightB border-t-1"/>
         <div className="flex gap-2">
