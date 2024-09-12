@@ -31,7 +31,7 @@ export const SizeOptions = ({sizes, selectedSize, handleSizeChange}:SizesProp) =
         <div
           className={`pr-[5px] flex justify-center items-center ${selectedSize === size['add-price'] ? 'text-light':'text-dark'}`}
         >
-          ${size.size}
+          {size.size}
         </div>
       </div>
     </label>

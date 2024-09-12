@@ -7,7 +7,7 @@ export interface Product {
     sizes: {
       [key: string]: SizeOption;
     },
-    additives: AdditivesOptions[],
+    additives: AdditivesOptionsType[],
     image: string,
   }
 
@@ -15,7 +15,7 @@ export interface SizeOption {
     size: string,
     "add-price": number,
 }
-export interface AdditivesOptions {
+export interface AdditivesOptionsType {
     name: string,
     "add-price": number,
 }

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Product } from '@/app/types/product';
 import { Container } from '@/app/components/Container';
-import { ProductDitails } from '@/app/components/productDitails/ProductDitails';
+import { ProductDetails } from '@/app/components/productDetails/ProductDetails';
 
 interface IParam {
   productID: string;
@@ -39,7 +39,7 @@ export default function ProductPage ({params}: {params:IParam}){
     <div>
       {product ? (
         <Container>
-          <ProductDitails product={product}/>
+          <ProductDetails product={product}/>
         </Container>        
         ) : (
         <div>Loading...</div>
