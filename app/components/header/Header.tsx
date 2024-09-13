@@ -2,6 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Container } from '../Container';
+import { IoCartOutline } from "react-icons/io5";
+import { MdMenuBook } from "react-icons/md";
 
 export const Header = () => {
   return (
@@ -11,6 +13,7 @@ export const Header = () => {
         flex
         items-center
         justify-between
+        text-dark
         ">
           <Link href="/">
            <Image
@@ -24,10 +27,10 @@ export const Header = () => {
           <div className="
           flex
           item-center
-          gap-3
+          gap-4
           ">
-            <Link href="/menu">Menu</Link>
-            <div>Cart</div>
+            <Link href="/menu"><MdMenuBook size={30}/></Link>
+            <Link href="/cart"><IoCartOutline size={30}/></Link>
           </div>
         </div>
       </Container>

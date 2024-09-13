@@ -46,7 +46,7 @@ export const ProductDetails = ({ product }: ProductProp) => {
       <div className="flex flex-col gap-6">
         <div className="flex font-medium text-heading-2">{product.name}</div>
         <div className="flex font-light">{product.description}</div>
-        <div>
+        <div className="flex flex-col gap-3">
           <div>Size</div>
           <SizeOptions 
             sizes={product.sizes} 
@@ -54,7 +54,7 @@ export const ProductDetails = ({ product }: ProductProp) => {
             handleSizeChange={handleSizeChange}
           />
         </div>
-        <div>
+        <div className="flex flex-col gap-3">
           <div>Additives</div>
           <AdditivesOptions 
             additives={product.additives}
