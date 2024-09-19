@@ -11,7 +11,7 @@ import Image from 'next/image';
 
 export const HomeSwiper = () => {
   return (
-    <div className="text-dark">
+    <div id="favorite" className="text-dark">
       <h2 className="p-[40px] text-center font-heading-2 text-heading-2 md:text-heading-2-md" >Choose your <span className="text-accent italic">favorite</span> coffee</h2>
       <Swiper
         navigation
