@@ -11,7 +11,7 @@ interface SizesProp {
 
 export const SizeOptions = ({sizes, selectedSize, handleSizeChange}:SizesProp) => {
   return (
-    <div className="flex gap-4">
+    <div className="flex flex-col sm:flex-row  gap-4">
     {Object.entries(sizes).map(([key, size]) => (
       <label key={key} className="flex flex-col items-center cursor-pointer">
       <input

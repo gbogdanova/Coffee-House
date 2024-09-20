@@ -10,9 +10,9 @@ interface AdditivesProp {
 export const AdditivesOptions = ({additives, selectedAdditives, handleAdditivesChange}:AdditivesProp) => {
 
   return (
-  <div className="flex gap-4">
+  <div className="flex flex-col sm:flex-row  gap-4">
     {additives.map((additive, index) => (
-      <label key={index} className="flex items-center cursor-pointer">
+      <label key={index} className="flex flex-col items-center cursor-pointer">
         <input
         type="checkbox"
         name="additives"

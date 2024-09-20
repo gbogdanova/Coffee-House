@@ -5,17 +5,13 @@ import { Product } from '@/app/types/product';
 import { Container } from '@/app/components/Container';
 import { ProductDetails } from '@/app/components/productDetails/ProductDetails';
 
-// interface IParam {
-//   productID: string;
-// }
-// {params}: {params:IParam}
-export default function ProductPage (){
+export default function ProductPage ({params}: {params: {productID: string}}){
   const [product, setProduct] = useState<Product | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const currentPath = window.location.pathname;
-    const productID = currentPath.split('/')[2];
+    // const currentPath = window.location.pathname;
+    // const productID = currentPath.split('/')[2];
     const fetchData = async () => {
       try {
         const response = await fetch('https://raw.githubusercontent.com/gbogdanova/coffee-house-data/main/products.json');
@@ -24,7 +20,7 @@ export default function ProductPage (){
         }
         
         const jsonData: Product[]= await response.json();
-        const selectedProduct = jsonData.find((product: Product) => product.id === productID);
+        const selectedProduct = jsonData.find((product: Product) => product.id === params.productID);
         setProduct(selectedProduct || null);
       } catch(error) {
         setError('Error fetching and parsing data.');
@@ -33,7 +29,7 @@ export default function ProductPage (){
       
     };
     fetchData();
-  }, []);
+  }, [params.productID]);
     
   return (
     <div>

@@ -7,7 +7,7 @@ import { MdOutlineWatchLater } from "react-icons/md";
 
 export const Footer = () => {
   return (
-    <footer className="
+    <footer id="contact" className="
     mt-[20px]
     p-[40px] lg:p-[100px]
     rounded-[40px]

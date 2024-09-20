@@ -5,7 +5,7 @@ import { FaApple, FaGooglePlay } from "react-icons/fa";
 
 export const HomeApp = () => {
   return (
-    <div className="
+    <div id="mobile" className="
     flex
     flex-col md:flex-row
     text-dark
