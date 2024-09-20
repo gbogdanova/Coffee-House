@@ -15,7 +15,7 @@ interface ProductCardProps {
 export const ProductCard = ({product}: ProductCardProps) => {
   const router = useRouter();
   return (
-    <div onClick={() => router.push(`/product/${product.id}`)} 
+    <div onClick={() => router.push(`/products/${product.id}`)} 
     className="text-dark box-border border border-lightB rounded-3xl overflow-hidden">
         <div className="h-full flex flex-col relative group hover:cursor-pointer">
           <div className="overflow-hidden rounded-3xl">

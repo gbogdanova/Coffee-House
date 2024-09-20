@@ -38,7 +38,7 @@ export const Header = () => {
           item-center
           gap-4
           ">
-            <Link href="/menu"><MdMenuBook size={30}/></Link>
+            <Link href="/products"><MdMenuBook size={30}/></Link>
             <Link href="/cart"><IoCartOutline size={30}/></Link>
           </div>
         </div>
