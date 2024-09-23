@@ -41,7 +41,7 @@ export const ProductDetails = ({ product }: ProductProp) => {
   };
 
   const totalAdditivesPrice = selectedAdditives.reduce((acc, additive) => acc + additive['add-price'], 0);
-  const totalPrice = (product.price + selectedSize + totalAdditivesPrice) * quantity;
+  const totalPrice = product.price * quantity + selectedSize * quantity + totalAdditivesPrice * quantity;
 
   return (
     <div className="my-[40px] md:my-[60px] flex flex-col gap-[40px] md:flex-row md:gap-[60px] text-dark">
