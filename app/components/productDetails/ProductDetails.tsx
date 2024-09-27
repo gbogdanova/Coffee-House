@@ -5,6 +5,7 @@ import formatPrice from '@/utils/formatPrice';
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { SizeOptions } from './SizeOptions';
 import { AdditivesOptions} from './AdditivesOptions';
+import { SetQuantity } from './SetQuantity';
 
 
 interface ProductProp {
@@ -13,7 +14,8 @@ interface ProductProp {
 
 export const ProductDetails = ({ product }: ProductProp) => {
   const [selectedSize, setSelectedSize] = useState<number>(0);
-  const [selectedAdditives, setSelectedAdditives] = useState<AdditivesOptionsType[]>([]); // Массив выбранных добавок
+  const [selectedAdditives, setSelectedAdditives] = useState<AdditivesOptionsType[]>([]);
+  const [quantity, setQuantity] = useState<number>(1);
 
   const handleSizeChange = (sizePrice: number) => {
     setSelectedSize(sizePrice);
@@ -28,9 +30,18 @@ export const ProductDetails = ({ product }: ProductProp) => {
      }
     });
   };
+  
+  const handleQuantity = (action: 'increase' | 'decrease') => {
+    if(action ==='decrease' && quantity > 1){
+      setQuantity(prev => prev - 1);
+    }
+    if(action === 'increase' && quantity < 10) {
+      setQuantity(prev => prev + 1);
+    }
+  };
 
-  const totalAdditivesPrice = selectedAdditives.reduce((acc, additive) => acc + additive['add-price'], 0); // Считаем итоговую цену добавок
-  const totalPrice = product.price + selectedSize + totalAdditivesPrice;
+  const totalAdditivesPrice = selectedAdditives.reduce((acc, additive) => acc + additive['add-price'], 0);
+  const totalPrice = (product.price + selectedSize + totalAdditivesPrice) * quantity;
 
   return (
     <div className="my-[40px] md:my-[60px] flex flex-col gap-[40px] md:flex-row md:gap-[60px] text-dark">
@@ -61,6 +72,13 @@ export const ProductDetails = ({ product }: ProductProp) => {
             selectedAdditives={selectedAdditives}
             handleAdditivesChange={handleAdditivesChange}
           />
+        </div>
+        <div className="flex flex-col gap-3">
+          <div>Quantity</div>
+          <SetQuantity 
+            quantity = {quantity}
+            handleQuantity = {handleQuantity}
+            />
         </div>
         <div className="flex justify-between font-medium text-heading-2">
           <div>Total:</div>
