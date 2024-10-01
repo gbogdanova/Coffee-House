@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "./components/header/Header";
 import { Footer } from "./components/footer/Footer";
+import { CartProvider } from "@/providers/CartProvider";
 
 const inter = Inter({ subsets: ["latin"], weight: ['300', '400', '600']});
 
@@ -22,20 +23,22 @@ export default function RootLayout({
       <link rel="icon" href="/cup.svg" />
       </head>
       <body className={`${inter.className} bg-light`}>
-        <div className="
-        max-w-[1440px]
-        mx-auto
-        flex 
-        flex-col 
-        p-3 md:p-5
-        min-h-screen 
-        bg-light">
-          <Header/>
-          <main className="flex-grow">
-            {children}
-          </main>
-          <Footer/>
-        </div>
+        <CartProvider>
+          <div className="
+          max-w-[1440px]
+          mx-auto
+          flex 
+          flex-col 
+          p-3 md:p-5
+          min-h-screen 
+          bg-light">
+            <Header/>
+            <main className="flex-grow">
+              {children}
+            </main>
+            <Footer/>
+          </div>
+        </CartProvider>   
       </body>
     </html>
   );
