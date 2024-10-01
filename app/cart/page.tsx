@@ -10,7 +10,7 @@ const Cart = () => {
 			<div className="text-heading-2 text-center">Your Cart is Still Empty!</div>
       <div className="text-center">It looks like you haven&apos;t added any coffee yet. Explore our Menu to find your favorites and start building your perfect order.</div>
       <div className="mt-8 flex justify-center">
-        <Link href="/menu" className="
+        <Link href="/products" className="
         flex
         justify-center
         w-[200px]
