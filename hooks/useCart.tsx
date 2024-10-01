@@ -20,14 +20,31 @@ export const CartContextProvider = ({ children }: Props) => {
   const handleAddProductToCart = useCallback((product: CartProductType) => {
     setCartProducts((prev) => {
       if (prev) {
-        return [...prev, product];
+        const productExists = prev.find((productPrev) =>
+          productPrev.id === product.id &&
+          productPrev.size === product.size &&
+          productPrev.additives.join(' ') === product.additives.join(' ')
+        );
+  
+        if (productExists) {
+          return prev.map((productPrev) =>
+            productPrev.id === product.id &&
+            productPrev.size === product.size &&
+            productPrev.additives.join(' ') === product.additives.join(' ')
+              ? { ...productPrev, quantity: productPrev.quantity + product.quantity }
+              : productPrev
+          );
+        } else {
+          return [...prev, product];
+        }
       } else {
         return [product];
       }
     });
-
+  
     setCartTotalQty((prevQty) => prevQty + product.quantity);
   }, []);
+  
 
   const value = { 
     cartTotalQty,

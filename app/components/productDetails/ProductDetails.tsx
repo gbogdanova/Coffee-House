@@ -58,7 +58,7 @@ export const ProductDetails = ({ product }: ProductProp) => {
     setCartProduct((prev) => ({
       ...prev,
       size: product.sizes[Object.keys(product.sizes)[selectedSize]].size,
-      additives: selectedAdditives.map(additive => additive.name),
+      additives: selectedAdditives.map(additive => additive.name).sort(),
       quantity: quantity,
       price: totalPrice,
     }));
