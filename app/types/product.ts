@@ -28,4 +28,5 @@ export type CartProductType = {
   additives: string[];
   quantity: number,
   price: number,
+  image: string,
 }

@@ -7,11 +7,8 @@ import { ProductDetails } from '@/app/components/productDetails/ProductDetails';
 import { useCart } from '@/hooks/useCart';
 
 export default function ProductPage ({params}: {params: {productID: string}}){
-  const {cartTotalQty} = useCart();
   const [product, setProduct] = useState<Product | null>(null);
   const [error, setError] = useState<string | null>(null);
-
-  console.log(cartTotalQty);
 
   useEffect(() => {
     

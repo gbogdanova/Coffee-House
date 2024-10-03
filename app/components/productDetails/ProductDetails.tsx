@@ -25,6 +25,7 @@ export const ProductDetails = ({ product }: ProductProp) => {
     additives: [],
     quantity: 1,
     price: product.price,
+    image: product.image,
   });
 
   const handleSizeChange = (sizeIndex: number) => {
@@ -63,8 +64,6 @@ export const ProductDetails = ({ product }: ProductProp) => {
       price: totalPrice,
     }));
   }, [selectedSize,selectedAdditives, quantity, totalPrice, product.sizes]);
-
-  console.log(cartProducts);
 
   return (
     <div className="my-[40px] md:my-[60px] flex flex-col gap-[40px] md:flex-row md:gap-[60px] text-dark">
