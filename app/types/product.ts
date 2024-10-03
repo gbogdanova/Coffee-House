@@ -19,3 +19,14 @@ export interface AdditivesOptionsType {
     name: string,
     "add-price": number,
 }
+
+export type CartProductType = {
+  id: string,
+  name: string, 
+  category: string,
+  size: string,
+  additives: string[];
+  quantity: number,
+  price: number,
+  image: string,
+}
