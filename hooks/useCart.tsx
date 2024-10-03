@@ -31,7 +31,9 @@ export const CartContextProvider = ({ children }: Props) => {
             productPrev.id === product.id &&
             productPrev.size === product.size &&
             productPrev.additives.join(' ') === product.additives.join(' ')
-              ? { ...productPrev, quantity: productPrev.quantity + product.quantity }
+              ? { ...productPrev,
+                quantity: productPrev.quantity + product.quantity,
+                price:  productPrev.price + product.price}
               : productPrev
           );
         } else {
