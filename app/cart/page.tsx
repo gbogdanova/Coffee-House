@@ -9,7 +9,7 @@ import { CartItem } from '../components/cart/CartItem';
 
 
 const Cart = () => {
-  const { cartProducts, cartTotalQty } = useCart();
+  const { cartProducts} = useCart();
   return (
 	<Container>
     {cartProducts ?  (

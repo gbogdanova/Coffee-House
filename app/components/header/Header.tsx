@@ -1,11 +1,15 @@
+'use client'
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Container } from '../Container';
 import { IoCartOutline } from "react-icons/io5";
 import { MdMenuBook } from "react-icons/md";
+import { useCart } from '@/hooks/useCart';
 
 export const Header = () => {
+  const { cartProducts, cartTotalQty } = useCart();
   return (
     <header>
       <Container>
@@ -39,7 +43,16 @@ export const Header = () => {
           gap-4
           ">
             <Link href="/products"><MdMenuBook size={30}/></Link>
-            <Link href="/cart"><IoCartOutline size={30}/></Link>
+            <div className='relative'>
+              <Link href="/cart">
+                <IoCartOutline size={30}/>
+                {cartTotalQty > 0 && (
+                  <div className="absolute -top-2 -right-2 bg-dark text-light text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    {cartTotalQty}
+                  </div>
+                )}
+              </Link>
+            </div>  
           </div>
         </div>
       </Container>
