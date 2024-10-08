@@ -52,7 +52,7 @@ export const ProductDetails = ({ product }: ProductProp) => {
   };
 
   const totalAdditivesPrice = selectedAdditives.reduce((acc, additive) => acc + additive['add-price'], 0);
-  const totalSizePrice = product.sizes[Object.keys(product.sizes)[selectedSize]]['add-price'] || 0; // Default to 0 if undefined
+  const totalSizePrice = product.sizes[Object.keys(product.sizes)[selectedSize]]['add-price'] || 0;
   const totalPrice = product.price * quantity + totalSizePrice * quantity + totalAdditivesPrice * quantity;
 
   useEffect(() => {
@@ -64,6 +64,17 @@ export const ProductDetails = ({ product }: ProductProp) => {
       price: totalPrice,
     }));
   }, [selectedSize,selectedAdditives, quantity, totalPrice, product.sizes]);
+
+  
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const handleAddProduct = () => {
+    if (isButtonDisabled) return;
+    handleAddProductToCart(cartProduct);
+    setIsButtonDisabled(true);
+    setTimeout(() => {
+      setIsButtonDisabled(false);
+    }, 2000);
+  };
 
   return (
     <div className="my-[40px] md:my-[60px] flex flex-col gap-[40px] md:flex-row md:gap-[60px] text-dark">
@@ -119,8 +130,12 @@ export const ProductDetails = ({ product }: ProductProp) => {
           </div>
         </div>
         <div>
-          <button className="w-[100%] py-2 rounded-3xl border border-dark font-medium text-heading-3 hover:bg-container hover:text-light"
-            onClick={() => handleAddProductToCart(cartProduct)}>Add To Cart</button>
+          <button 
+            className={`w-[100%] py-2 rounded-3xl border border-dark font-medium text-heading-3 
+              ${isButtonDisabled ? 'border-lightB text-lightB' : 'hover:bg-container hover:text-light'}`}  
+            onClick={handleAddProduct}
+            disabled={isButtonDisabled}
+            >{isButtonDisabled ? 'Adding...' : 'Add To Cart'}</button>
         </div>
       </div>
     </div>
