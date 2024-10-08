@@ -6,6 +6,7 @@ type CartContextType = {
   cartTotalQty: number;
   cartProducts: CartProductType[] | null;
   handleAddProductToCart: (product: CartProductType) => void;
+  handleRemoveProductFromCart: (product: CartProductType) => void;
 }
 
 export const CartContext = createContext<CartContextType | null>(null);
@@ -19,7 +20,6 @@ export const CartContextProvider = ({ children }: Props) => {
   const [cartProducts, setCartProducts] = useState<CartProductType[] | null>(null);
 
   const handleAddProductToCart = useCallback((product: CartProductType) => {
-    console.log('Adding product to cart:', product);
     setCartProducts((prev) => {
       let updatedCart;
       if (prev) {
@@ -50,12 +50,36 @@ export const CartContextProvider = ({ children }: Props) => {
     setCartTotalQty((prevQty) => prevQty + product.quantity);
     toast.success('Item added to cart!');
   }, []);
+
+const handleRemoveProductFromCart = useCallback((product: CartProductType) => {
+    setCartProducts((prev) => {
+      if (prev) {
+        const productIndex = prev.findIndex((productPrev) =>
+          productPrev.id === product.id &&
+          productPrev.size === product.size &&
+          productPrev.additives.join(' ') === product.additives.join(' ')
+        );
+        
+        if (productIndex !== -1) {
+          let updatedCart = prev.filter((_, ind) => ind !== productIndex);
+          return updatedCart.length > 0 ? updatedCart : null;
+        }
+      }
+  
+      return prev; 
+    });
+  
+    setCartTotalQty((prevQty) => prevQty - product.quantity);
+    
+  }, []);
+  
   
 
   const value = { 
     cartTotalQty,
     cartProducts,
     handleAddProductToCart,
+    handleRemoveProductFromCart,
   };
 
   return (
