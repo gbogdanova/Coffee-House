@@ -1,5 +1,6 @@
 import { CartProductType } from '@/app/types/product';
-import { createContext, useCallback, useContext, useState, ReactNode } from 'react';
+import { createContext, useCallback, useContext, useState, ReactNode, useEffect } from 'react';
+import {toast} from 'react-hot-toast';
 
 type CartContextType = {
   cartTotalQty: number;
@@ -18,7 +19,9 @@ export const CartContextProvider = ({ children }: Props) => {
   const [cartProducts, setCartProducts] = useState<CartProductType[] | null>(null);
 
   const handleAddProductToCart = useCallback((product: CartProductType) => {
+    console.log('Adding product to cart:', product);
     setCartProducts((prev) => {
+      let updatedCart;
       if (prev) {
         const productExists = prev.find((productPrev) =>
           productPrev.id === product.id &&
@@ -27,7 +30,7 @@ export const CartContextProvider = ({ children }: Props) => {
         );
   
         if (productExists) {
-          return prev.map((productPrev) =>
+          updatedCart = prev.map((productPrev) =>
             productPrev.id === product.id &&
             productPrev.size === product.size &&
             productPrev.additives.join(' ') === product.additives.join(' ')
@@ -37,14 +40,15 @@ export const CartContextProvider = ({ children }: Props) => {
               : productPrev
           );
         } else {
-          return [...prev, product];
+          updatedCart = [...prev, product];
         }
       } else {
-        return [product];
+        updatedCart = [product];
       }
+      return updatedCart;
     });
-  
     setCartTotalQty((prevQty) => prevQty + product.quantity);
+    toast.success('Item added to cart!');
   }, []);
   
 
