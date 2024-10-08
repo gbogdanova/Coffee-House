@@ -15,7 +15,7 @@ const Cart = () => {
     {cartProducts ?  (
       <div className="flex flex-col text-dark">
         <div className="py-8 text-heading-2 text-center">Shopping Cart</div>
-        <div className="grid grid-cols-4">
+        <div className="grid grid-cols-[1fr,3fr,3fr,3fr]">
           <div className="col-span-2 justify-self-start">PRODUCT</div>
           <div className="justify-self-center">QUANTITY</div>
           <div className="justify-self-end">TOTAL</div>
