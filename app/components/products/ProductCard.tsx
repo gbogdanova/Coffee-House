@@ -1,12 +1,11 @@
 "use client";
 
-import { useState } from 'react';
 import { Product } from '../../types/product';
 import Image from 'next/image';
 import truncateText from '@/utils/truncateText';
 import formatPrice from '@/utils/formatPrice';
 import { useRouter } from 'next/navigation';
-import { useCart } from '@/hooks/useCart';
+import { AddToCartButt } from '../productDetails/AddToCartButt';
 
 interface ProductCardProps {
   product: Product;
@@ -14,7 +13,6 @@ interface ProductCardProps {
 
 export const ProductCard = ({product}: ProductCardProps) => {
   const router = useRouter();
-  const { handleAddProductToCart, cartProducts } = useCart();
   const cartProduct = {
     id: product.id,
     name: product.name,
@@ -24,15 +22,6 @@ export const ProductCard = ({product}: ProductCardProps) => {
     quantity: 1,
     price: product.price,
     image: product.image,
-  };
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-  const handleAddProduct = () => {
-    if (isButtonDisabled) return;
-    handleAddProductToCart(cartProduct);
-    setIsButtonDisabled(true);
-    setTimeout(() => {
-      setIsButtonDisabled(false);
-    }, 2000);
   };
 
   return (
@@ -57,12 +46,11 @@ export const ProductCard = ({product}: ProductCardProps) => {
         </div>
       </div>
       <div className="absolute bottom-3 right-3">
-          <button 
-            className={`flex items-center justify-center w-10 h-10 rounded-full border border-dark  text-container hover:text-light hover:bg-container"
-              ${isButtonDisabled ? 'border-lightB text-lightB' : 'hover:bg-container hover:text-light'}`}  
-            onClick={handleAddProduct}
-            disabled={isButtonDisabled}
-            >+</button>
+        <AddToCartButt 
+        cartProduct={cartProduct} 
+        className={`flex items-center justify-center w-10 h-10 rounded-full`} 
+        btnTextDis={'+'}
+        btnText={'+'}/>
       </div>
     </div>
   )

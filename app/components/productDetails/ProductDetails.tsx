@@ -6,14 +6,13 @@ import { IoIosInformationCircleOutline } from "react-icons/io";
 import { SizeOptions } from './SizeOptions';
 import { AdditivesOptions } from './AdditivesOptions';
 import { SetQuantity } from './SetQuantity';
-import { useCart } from '@/hooks/useCart';
+import { AddToCartButt } from './AddToCartButt';
 
 interface ProductProp {
   product: Product;
 }
 
 export const ProductDetails = ({ product }: ProductProp) => {
-  const { handleAddProductToCart, cartProducts } = useCart();
   const [selectedSize, setSelectedSize] = useState<number>(0);
   const [selectedAdditives, setSelectedAdditives] = useState<AdditivesOptionsType[]>([]);
   const [quantity, setQuantity] = useState<number>(1);
@@ -64,17 +63,6 @@ export const ProductDetails = ({ product }: ProductProp) => {
       price: totalPrice,
     }));
   }, [selectedSize,selectedAdditives, quantity, totalPrice, product.sizes]);
-
-  
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-  const handleAddProduct = () => {
-    if (isButtonDisabled) return;
-    handleAddProductToCart(cartProduct);
-    setIsButtonDisabled(true);
-    setTimeout(() => {
-      setIsButtonDisabled(false);
-    }, 2000);
-  };
 
   return (
     <div className="my-[40px] md:my-[60px] flex flex-col gap-[40px] md:flex-row md:gap-[60px] text-dark">
@@ -130,12 +118,17 @@ export const ProductDetails = ({ product }: ProductProp) => {
           </div>
         </div>
         <div>
-          <button 
+          <AddToCartButt
+          cartProduct={cartProduct} 
+          btnTextDis={'Adding...'}
+          btnText={'Add To Cart'}/>
+          {/* <button 
             className={`w-[100%] py-2 rounded-3xl border border-dark font-medium text-heading-3 
               ${isButtonDisabled ? 'border-lightB text-lightB' : 'hover:bg-container hover:text-light'}`}  
             onClick={handleAddProduct}
             disabled={isButtonDisabled}
-            >{isButtonDisabled ? 'Adding...' : 'Add To Cart'}</button>
+            >{isButtonDisabled ? 'Adding...' : 'Add To Cart'}
+          </button> */}
         </div>
       </div>
     </div>
