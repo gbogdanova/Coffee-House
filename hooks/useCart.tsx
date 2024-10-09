@@ -52,25 +52,24 @@ export const CartContextProvider = ({ children }: Props) => {
   }, []);
 
 const handleRemoveProductFromCart = useCallback((product: CartProductType) => {
-    setCartProducts((prev) => {
-      if (prev) {
-        const productIndex = prev.findIndex((productPrev) =>
-          productPrev.id === product.id &&
-          productPrev.size === product.size &&
-          productPrev.additives.join(' ') === product.additives.join(' ')
-        );
-        
-        if (productIndex !== -1) {
-          let updatedCart = prev.filter((_, ind) => ind !== productIndex);
-          return updatedCart.length > 0 ? updatedCart : null;
-        }
+  setCartProducts((prev) => {
+    if (prev) {
+      const productIndex = prev.findIndex((productPrev) =>
+        productPrev.id === product.id &&
+        productPrev.size === product.size &&
+        productPrev.additives.join(' ') === product.additives.join(' ')
+      );
+      
+      if (productIndex !== -1) {
+        let updatedCart = prev.filter((_, ind) => ind !== productIndex);
+        return updatedCart.length > 0 ? updatedCart : null;
       }
-  
-      return prev; 
-    });
-  
-    setCartTotalQty((prevQty) => prevQty - product.quantity);
-    
+    }
+    return prev; 
+  });
+
+  setCartTotalQty((prevQty) => prevQty - product.quantity);
+  toast.success('Item removed from cart!');
   }, []);
   
   
