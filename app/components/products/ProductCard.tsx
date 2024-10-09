@@ -1,11 +1,12 @@
 "use client";
 
-import React from 'react';
+import { useState } from 'react';
 import { Product } from '../../types/product';
 import Image from 'next/image';
 import truncateText from '@/utils/truncateText';
 import formatPrice from '@/utils/formatPrice';
 import { useRouter } from 'next/navigation';
+import { useCart } from '@/hooks/useCart';
 
 interface ProductCardProps {
   product: Product;
@@ -13,25 +14,56 @@ interface ProductCardProps {
 
 export const ProductCard = ({product}: ProductCardProps) => {
   const router = useRouter();
+  const { handleAddProductToCart, cartProducts } = useCart();
+  const cartProduct = {
+    id: product.id,
+    name: product.name,
+    category: product.category,
+    size: product.sizes[Object.keys(product.sizes)[0]].size,
+    additives: [],
+    quantity: 1,
+    price: product.price,
+    image: product.image,
+  };
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const handleAddProduct = () => {
+    if (isButtonDisabled) return;
+    handleAddProductToCart(cartProduct);
+    setIsButtonDisabled(true);
+    setTimeout(() => {
+      setIsButtonDisabled(false);
+    }, 2000);
+  };
+
   return (
-    <div onClick={() => router.push(`/products/${product.id}`)} 
-    className="text-dark box-border border border-lightB rounded-3xl overflow-hidden">
-        <div className="h-full flex flex-col relative group hover:cursor-pointer">
-          <div className="overflow-hidden rounded-3xl">
-            <Image 
-              src={product.image} 
-              alt={product.name} 
-              width={300} 
-              height={300} 
-              className="w-full transition-transform duration-300 transform group-hover:scale-110" 
-            />
-          </div>
-          <div className="flex flex-col flex-1 px-3 py-4 gap-2 justify-between">
-              <div className="flex font-medium text-heading-3">{product.name}</div>
-              <div className="flex flex-grow font-light">{truncateText(product.description)}</div>
-              <div className="flex font-semibold text-heading-3">{formatPrice(product.price)}</div>
-          </div>
+    <div className="relative text-dark box-border border border-lightB rounded-3xl overflow-hidden">
+     <div onClick={() => router.push(`/products/${product.id}`)} 
+      className="h-full flex flex-col relative group hover:cursor-pointer">
+        <div className="overflow-hidden rounded-3xl">
+          <Image 
+            src={product.image} 
+            alt={product.name} 
+            width={300} 
+            height={300} 
+            className="w-full transition-transform duration-300 transform group-hover:scale-110" 
+          />
         </div>
-   </div>
+        <div className="flex flex-col flex-1 px-3 py-4 gap-2 justify-between">
+            <div className="flex font-medium text-heading-3">{product.name}</div>
+            <div className="flex flex-grow font-light">{truncateText(product.description)}</div>
+            <div className="flex font-semibold text-heading-3">
+              {formatPrice(product.price)}
+            </div>
+        </div>
+      </div>
+      <div className="absolute bottom-3 right-3">
+          <button 
+            className={`flex items-center justify-center w-10 h-10 rounded-full border border-dark  text-container hover:text-light hover:bg-container"
+              ${isButtonDisabled ? 'border-lightB text-lightB' : 'hover:bg-container hover:text-light'}`}  
+            onClick={handleAddProduct}
+            disabled={isButtonDisabled}
+            >+</button>
+      </div>
+    </div>
   )
 }
