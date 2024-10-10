@@ -49,7 +49,7 @@ export const ProductCard = ({product}: ProductCardProps) => {
       <div className="absolute bottom-3 right-3">
         <AddToCartButt 
         cartProduct={cartProduct} 
-        className={`flex items-center justify-center w-10 h-10 rounded-full`} 
+        className={`flex items-center justify-center w-10 h-10 rounded-full border border-dark`} 
         btnTextDis={'+'}
         btnText={'+'}/>
       </div>

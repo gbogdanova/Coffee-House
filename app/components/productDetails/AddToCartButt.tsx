@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 
 interface AddToCartButtProps {
     cartProduct: CartProductType;
-    className?: string;
+    className: string;
     btnTextDis: string;
     btnText: string;
 }
@@ -24,8 +24,7 @@ export const AddToCartButt = ({cartProduct, className, btnTextDis, btnText}: Add
 
   return (
     <button 
-    className={`w-[100%] py-2 rounded-3xl border border-dark font-medium text-heading-3 
-      ${isButtonDisabled ? 'border-lightB text-lightB' : 'hover:bg-container hover:text-light'} ${className}`}  
+    className={`${className} ${isButtonDisabled ? 'border-lightB text-lightB' : 'hover:bg-container hover:text-light'} `}  
     onClick={handleAddProduct}
     disabled={isButtonDisabled}
     >{isButtonDisabled ? btnTextDis : btnText}

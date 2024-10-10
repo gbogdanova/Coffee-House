@@ -120,16 +120,10 @@ export const ProductDetails = ({ product }: ProductProp) => {
         </div>
         <div>
           <AddToCartButt
+          className={`w-[100%] py-2 rounded-3xl border border-dark font-medium text-heading-3`}
           cartProduct={cartProduct} 
           btnTextDis={'Adding...'}
           btnText={'Add To Cart'}/>
-          {/* <button 
-            className={`w-[100%] py-2 rounded-3xl border border-dark font-medium text-heading-3 
-              ${isButtonDisabled ? 'border-lightB text-lightB' : 'hover:bg-container hover:text-light'}`}  
-            onClick={handleAddProduct}
-            disabled={isButtonDisabled}
-            >{isButtonDisabled ? 'Adding...' : 'Add To Cart'}
-          </button> */}
         </div>
       </div>
     </div>
