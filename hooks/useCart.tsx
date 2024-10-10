@@ -1,9 +1,10 @@
 import { CartProductType } from '@/app/types/product';
-import { createContext, useCallback, useContext, useState, ReactNode, useEffect } from 'react';
+import { createContext, useCallback, useContext, useState, ReactNode } from 'react';
 import {toast} from 'react-hot-toast';
 
 type CartContextType = {
   cartTotalQty: number;
+  cartSubtotal: number;
   cartProducts: CartProductType[] | null;
   handleAddProductToCart: (product: CartProductType) => void;
   handleRemoveProductFromCart: (product: CartProductType) => void;
@@ -18,6 +19,11 @@ interface Props {
 export const CartContextProvider = ({ children }: Props) => {
   const [cartTotalQty, setCartTotalQty] = useState(0);
   const [cartProducts, setCartProducts] = useState<CartProductType[] | null>(null);
+  const [cartSubtotal, setCartSubtotal] = useState(0);
+
+  const calculateSubtotal = (cartProducts: CartProductType[]) => {
+    return cartProducts.reduce((sum, product) => sum + (product.price * product.quantity), 0);
+  };
 
   const handleAddProductToCart = useCallback((product: CartProductType) => {
     setCartProducts((prev) => {
@@ -45,6 +51,7 @@ export const CartContextProvider = ({ children }: Props) => {
       } else {
         updatedCart = [product];
       }
+      setCartSubtotal(calculateSubtotal(updatedCart));
       return updatedCart;
     });
     setCartTotalQty((prevQty) => prevQty + product.quantity);
@@ -62,6 +69,7 @@ const handleRemoveProductFromCart = useCallback((product: CartProductType) => {
       
       if (productIndex !== -1) {
         let updatedCart = prev.filter((_, ind) => ind !== productIndex);
+        setCartSubtotal(calculateSubtotal(updatedCart));
         return updatedCart.length > 0 ? updatedCart : null;
       }
     }
@@ -76,6 +84,7 @@ const handleRemoveProductFromCart = useCallback((product: CartProductType) => {
 
   const value = { 
     cartTotalQty,
+    cartSubtotal,
     cartProducts,
     handleAddProductToCart,
     handleRemoveProductFromCart,
