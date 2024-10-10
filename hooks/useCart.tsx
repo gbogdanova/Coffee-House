@@ -8,6 +8,8 @@ type CartContextType = {
   cartProducts: CartProductType[] | null;
   handleAddProductToCart: (product: CartProductType) => void;
   handleRemoveProductFromCart: (product: CartProductType) => void;
+  handleIncreaseProductQty: (product: CartProductType) => void;
+  handleDecreaseProductQty: (product: CartProductType) => void;
 }
 
 export const CartContext = createContext<CartContextType | null>(null);
@@ -22,7 +24,7 @@ export const CartContextProvider = ({ children }: Props) => {
   const [cartSubtotal, setCartSubtotal] = useState(0);
 
   const calculateSubtotal = (cartProducts: CartProductType[]) => {
-    return cartProducts.reduce((sum, product) => sum + (product.price * product.quantity), 0);
+    return cartProducts.reduce((sum, product) => sum + (product.price1 * product.quantity), 0);
   };
 
   const handleAddProductToCart = useCallback((product: CartProductType) => {
@@ -79,6 +81,50 @@ const handleRemoveProductFromCart = useCallback((product: CartProductType) => {
   setCartTotalQty((prevQty) => prevQty - product.quantity);
   toast.success('Item removed from cart!');
   }, []);
+
+   const handleIncreaseProductQty = useCallback((product: CartProductType) => {
+    setCartProducts((prev) => {
+      if (!prev) return prev;
+  
+      const updatedCart = prev.map((item) => {
+        if (item.id === product.id && item.size === product.size && item.additives.join(' ') === product.additives.join(' ')) {
+          if (item.quantity < 10) {
+            return { 
+              ...item, 
+              quantity: item.quantity + 1, 
+              price: (item.price / item.quantity) * (item.quantity + 1) 
+            };
+          }
+        }
+        return item;
+      });
+  
+      setCartSubtotal(calculateSubtotal(updatedCart));
+      return updatedCart;
+    });
+  
+    setCartTotalQty((prevQty) => prevQty + 1);
+  }, []);
+  
+
+  const handleDecreaseProductQty = useCallback((product: CartProductType) => {
+    setCartProducts((prev) => {
+      if (!prev) return prev;
+
+      const updatedCart = prev.map((item) => {
+        if (item.id === product.id && item.size === product.size && item.additives.join(' ') === product.additives.join(' ')) {
+          if (item.quantity > 1) {
+            return { ...item, quantity: item.quantity - 1, price: (item.price / item.quantity) * (item.quantity - 1) };
+          }
+        }
+        return item;
+      });
+      setCartSubtotal(calculateSubtotal(updatedCart));
+      return updatedCart;
+    });
+
+    setCartTotalQty((prevQty) => prevQty - 1);
+  }, []);
   
   
 
@@ -88,6 +134,8 @@ const handleRemoveProductFromCart = useCallback((product: CartProductType) => {
     cartProducts,
     handleAddProductToCart,
     handleRemoveProductFromCart,
+    handleIncreaseProductQty,
+    handleDecreaseProductQty,
   };
 
   return (

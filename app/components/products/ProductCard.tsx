@@ -19,6 +19,7 @@ export const ProductCard = ({product}: ProductCardProps) => {
     category: product.category,
     size: product.sizes[Object.keys(product.sizes)[0]].size,
     additives: [],
+    price1: product.price,
     quantity: 1,
     price: product.price,
     image: product.image,
