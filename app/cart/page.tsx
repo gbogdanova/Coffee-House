@@ -7,6 +7,7 @@ import { BsCupHot } from "react-icons/bs";
 import { useCart } from '@/hooks/useCart';
 import { CartItem } from '../components/cart/CartItem';
 import formatPrice from '@/utils/formatPrice';
+import { Checkout } from '../components/cart/Checkout';
 
 
 const Cart = () => {
@@ -29,7 +30,11 @@ const Cart = () => {
           </React.Fragment>
           ))}
         </div>
-        <div>Subtotal: {formatPrice(cartSubtotal)}</div>  
+        <div className='flex gap-6 justify-end font-heading-3'>
+          <div>Subtotal:</div>
+          <div>{formatPrice(cartSubtotal)}</div> 
+        </div>
+        <Checkout/>
       </div>
     ) : (
       <div className="my-8 flex flex-col gap-6 text-dark">
