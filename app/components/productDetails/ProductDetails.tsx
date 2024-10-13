@@ -6,14 +6,13 @@ import { IoIosInformationCircleOutline } from "react-icons/io";
 import { SizeOptions } from './SizeOptions';
 import { AdditivesOptions } from './AdditivesOptions';
 import { SetQuantity } from './SetQuantity';
-import { useCart } from '@/hooks/useCart';
+import { AddToCartButt } from './AddToCartButt';
 
 interface ProductProp {
   product: Product;
 }
 
 export const ProductDetails = ({ product }: ProductProp) => {
-  const { handleAddProductToCart, cartProducts } = useCart();
   const [selectedSize, setSelectedSize] = useState<number>(0);
   const [selectedAdditives, setSelectedAdditives] = useState<AdditivesOptionsType[]>([]);
   const [quantity, setQuantity] = useState<number>(1);
@@ -23,6 +22,7 @@ export const ProductDetails = ({ product }: ProductProp) => {
     category: product.category,
     size: product.sizes[Object.keys(product.sizes)[0]].size,
     additives: [],
+    price1: product.price,
     quantity: 1,
     price: product.price,
     image: product.image,
@@ -52,7 +52,7 @@ export const ProductDetails = ({ product }: ProductProp) => {
   };
 
   const totalAdditivesPrice = selectedAdditives.reduce((acc, additive) => acc + additive['add-price'], 0);
-  const totalSizePrice = product.sizes[Object.keys(product.sizes)[selectedSize]]['add-price'] || 0; // Default to 0 if undefined
+  const totalSizePrice = product.sizes[Object.keys(product.sizes)[selectedSize]]['add-price'] || 0;
   const totalPrice = product.price * quantity + totalSizePrice * quantity + totalAdditivesPrice * quantity;
 
   useEffect(() => {
@@ -119,8 +119,11 @@ export const ProductDetails = ({ product }: ProductProp) => {
           </div>
         </div>
         <div>
-          <button className="w-[100%] py-2 rounded-3xl border border-dark font-medium text-heading-3 hover:bg-container hover:text-light"
-            onClick={() => handleAddProductToCart(cartProduct)}>Add To Cart</button>
+          <AddToCartButt
+          className={`w-[100%] py-2 rounded-3xl border border-dark font-medium text-heading-3`}
+          cartProduct={cartProduct} 
+          btnTextDis={'Adding...'}
+          btnText={'Add To Cart'}/>
         </div>
       </div>
     </div>

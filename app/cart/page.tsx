@@ -6,16 +6,18 @@ import Link from 'next/link';
 import { BsCupHot } from "react-icons/bs";
 import { useCart } from '@/hooks/useCart';
 import { CartItem } from '../components/cart/CartItem';
+import formatPrice from '@/utils/formatPrice';
+import { Checkout } from '../components/cart/Checkout';
 
 
 const Cart = () => {
-  const { cartProducts, cartTotalQty } = useCart();
+  const { cartProducts, cartSubtotal} = useCart();
   return (
 	<Container>
     {cartProducts ?  (
       <div className="flex flex-col text-dark">
         <div className="py-8 text-heading-2 text-center">Shopping Cart</div>
-        <div className="grid grid-cols-4">
+        <div className="grid grid-cols-[1fr,3fr,3fr,3fr]">
           <div className="col-span-2 justify-self-start">PRODUCT</div>
           <div className="justify-self-center">QUANTITY</div>
           <div className="justify-self-end">TOTAL</div>
@@ -27,7 +29,12 @@ const Cart = () => {
             <CartItem cartItem={product} />
           </React.Fragment>
           ))}
-        </div>   
+        </div>
+        <div className='flex gap-6 justify-end font-heading-3'>
+          <div>Subtotal:</div>
+          <div>{formatPrice(cartSubtotal)}</div> 
+        </div>
+        <Checkout/>
       </div>
     ) : (
       <div className="my-8 flex flex-col gap-6 text-dark">
