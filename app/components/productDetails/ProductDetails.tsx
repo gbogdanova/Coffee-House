@@ -54,16 +54,18 @@ export const ProductDetails = ({ product }: ProductProp) => {
   const totalAdditivesPrice = selectedAdditives.reduce((acc, additive) => acc + additive['add-price'], 0);
   const totalSizePrice = product.sizes[Object.keys(product.sizes)[selectedSize]]['add-price'] || 0;
   const totalPrice = product.price * quantity + totalSizePrice * quantity + totalAdditivesPrice * quantity;
+  const totalPrice1 = totalPrice / quantity;
 
   useEffect(() => {
     setCartProduct((prev) => ({
       ...prev,
       size: product.sizes[Object.keys(product.sizes)[selectedSize]].size,
       additives: selectedAdditives.map(additive => additive.name).sort(),
+      price1: totalPrice1,
       quantity: quantity,
       price: totalPrice,
     }));
-  }, [selectedSize,selectedAdditives, quantity, totalPrice, product.sizes]);
+  }, [selectedSize,selectedAdditives,totalPrice1, quantity, totalPrice, product.sizes]);
 
   return (
     <div className="my-[40px] md:my-[60px] flex flex-col gap-[40px] md:flex-row md:gap-[60px] text-dark">
